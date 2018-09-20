@@ -127,7 +127,6 @@ $(document).ready(function() {
     	for (var i = 0; i < SkuData.length; i++) { 
     		skuDiv+="<div class='col-md-3'><div class='custom-control custom-checkbox skuDi'>"+
 			  		"<input type='checkbox' class='custom-control-input sku' id='customCheck"+i+"' value='"+SkuData[i].color+"'>"+
-			  		"<input type='hidden' class='custom-control-input size' id='customCheck"+i+"' value='"+SkuData[i].size+"'>"+
 			  		"<label class='custom-control-label' for='customCheck"+i+"'>"+SkuData[i].sku+"</label>"+
 			  		"</div></div>";
 		}
@@ -167,10 +166,10 @@ function formSubmit() {
 		    	var sizeStr = document.getElementById("size").value;
 				var sizeStrArray = sizeStr.split(",");
 				//$("#size").attr("disabled", true);
-				//for (var i = 0; i < sizeStrArray.length; i++) {
+				for (var i = 0; i < sizeStrArray.length; i++) {
 					$.ajax({
 						url:"../../../CheckSkuExists",
-						data:{brand:$("#brand").val(), model:$("#modelNo").val(), color:$($('.sku')[j]).val(), size:$($('.size')[j]).val()},
+						data:{brand:$("#brand").val(), model:$("#modelNo").val(), color:$($('.sku')[j]).val(), size:sizeStrArray[i]},
 						type:"GET",
 						 async:false,
 						success:function(data){ 
@@ -195,7 +194,7 @@ function formSubmit() {
 							}
 						}
 					});
-				//}
+				}
 		    }
 		    if (successMsg) {
 				$("#alertMessage").addClass("HideThisElement");
@@ -240,14 +239,11 @@ function GenerateSKU() {
 		$("#alertMessage").removeClass("HideThisElement"); 
 	} else{
 		var str = document.getElementById("color").value;
-		var str1 = document.getElementById("size").value;
-		var res = str.split(",");	var res1 = str1.split(",");	
+		var res = str.split(",");		
 		var sku="";
 		for (var i = 0; i < res.length; i++) {
-			for (var j = 0; j < res1.length; j++) {
-				sku=document.getElementById("brandAbbr").value+"-"+document.getElementById("modelNo").value+"-"+$.trim(res[i])+"-"+$.trim(res1[j]);
-				skuId.push({sku:sku, color:$.trim(res[i]), size:$.trim(res1[j])});
-			}			
+			sku=document.getElementById("brandAbbr").value+"-"+document.getElementById("modelNo").value+"-"+$.trim(res[i]);
+			skuId.push({sku:sku, color:$.trim(res[i])});
 		}		
 	}
 	return skuId;

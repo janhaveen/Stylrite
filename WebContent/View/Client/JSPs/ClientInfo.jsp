@@ -15,7 +15,7 @@
 </style>
 </head>
 <body>
-    <div class="card" id="">
+    <div class="card HideThisElement" id="clientInfoDiv">
     <div class="card-body" style="padding-bottom: 0px;">
     	<!-- <h5 class="card-title">Client Info</h5><hr> -->
 		<!-- <form action="" id="newElementForm" name="newElementForm"> -->

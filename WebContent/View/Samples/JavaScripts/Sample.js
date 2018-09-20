@@ -59,6 +59,12 @@ $(document).ready(function(){
 		$("#updateBtnDiv").addClass("HideThisElement");
 		$("#SampleFormDispatchDiv").addClass("HideThisElement");
 	}
+	
+
+	$("#CommentsDetails-tab").click(function() {
+		getCommentsHistory($("#selectedRequisitioId").val(), 0, 1);
+    });
+	
 //	$("#ProductDatatables .dt-button").addClass("HideThisElement");
     /*$("#source").change(function () {
         var val = this.value;
@@ -150,6 +156,20 @@ $(document).ready(function(){
     	formSubmit();
 	});*/
 	
+	$("#SubmitButtonRegisterComments").click(function() {
+		var generator = new IDGenerator();
+		$.ajax({
+			url:"../../../UpdateRequisitionComments",
+			data:{action: "322",remarks: $("#newcomments").val(),requisitionLogID: "RL"+generator.generate(),requisitionID : $("#selectedRequisitioId").val()},
+			type:"POST",
+			success:function(data){
+				$("#newcomments").val('');
+//				$("#commDiv").addClass("HideThisElement");
+				getCommentsHistory($("#selectedRequisitioId").val(),0,1);
+			}
+		});
+	});
+	
 	$("#UpdateDispatchButton").click(function() {
 		if($("#dispatchedDate").val() == "")
 		{
@@ -202,7 +222,7 @@ $(document).ready(function(){
     	if(confirmed == false)
     	{
     		//SwalConfrm("Some Items are not selected, do you want to proceed?");
-    		/*swal({
+    		swal({
     			  title: "Are you sure?",
     			  text: "Some Items are not selected, do you want to proceed?",
     			  type: "warning",
@@ -217,19 +237,7 @@ $(document).ready(function(){
 				  } else {
 				    swal("Cancelled", "Your imaginary file is safe :)", "error");
 				  }
-				});*/
-    		swal({
-				  title: "Are you sure?",
-				  text: "Some Items are not selected, do you want to proceed?",
-				  icon: "warning",
-				  buttons: true,
-				  dangerMode: false,
-			})
-	  		.then((isConfirm) => {
-	  			  if (isConfirm) {
-	  				formSubmit();
-	  			  } 
-	  		});
+				});
     	}
     	else
     	{
@@ -393,12 +401,9 @@ function formSubmit()
 					{
 						formData+="requisitionItemID="+$($(row.cells[j])).html()+"&requitionstatus=202&remarks="+$("#updateRemarks").val()+"&";
 					}
-					if(j==6){
-						formData+="barcode="+$('#barcode'+ProductId).val()+"&StockOutId=ST"+generator.generate()+"&";
-					}
 				}
 			}
-			formData+="requisitionID="+requisitionID+"&requisitionLogID="+requisitionLogID+"&reason="+$("#reason").val()+"&modeOfTransport="+$("#modeOfTransport").val()+"&expectedReceiptDate="
+			formData+="requisitionID="+requisitionID+"&requitionAction=321&requisitionLogID="+requisitionLogID+"&reason="+$("#reason").val()+"&modeOfTransport="+$("#modeOfTransport").val()+"&expectedReceiptDate="
 			+$("#expectedReceiptDate").val()+"&remarks="+$("#remarks").val()+"&action="+$("#action").val()+"&count="+count;
 			console.log(formData);
 			$.ajax({
@@ -421,11 +426,11 @@ function formSubmit()
 	{
 		if($("#action").val() == "updateDispatched")
 		{
-			var formData=$("#dispatchForm").serialize()+"&requisitionID="+requisitionID+"&requisitionLogID="+requisitionLogID+"&requitionstatus=203&action="+$("#action").val()+"&count="+count;
+			var formData=$("#dispatchForm").serialize()+"&requisitionID="+requisitionID+"&requisitionLogID="+requisitionLogID+"&requitionAction=321&requitionstatus=203&action="+$("#action").val()+"&count="+count;
 		}
 		else if($("#action").val() == "updateRecieved")
 		{
-			var formData="requisitionID="+requisitionID+"&requisitionLogID="+requisitionLogID+"&requitionstatus=204" +
+			var formData="requisitionID="+requisitionID+"&requitionAction=321&requisitionLogID="+requisitionLogID+"&requitionstatus=204" +
 					"&receiptDate="+$("#sampleReceiptDate").val()+"&remarks="+$("#receivedRemarks").val()+
 							"&action="+$("#action").val()+"&count="+count;
 		}
@@ -488,6 +493,58 @@ function Swal(msg)
 		  confirmButtonText: "Ok!",
 		  closeOnConfirm: false
 		});
+}
+
+function getCommentsHistory(rowId, start, isRefresh, e) {
+	$.ajax({
+		url:"../../../GetRequisitionRemarksHistory?requisitionId="+rowId+"&action=322&start="+start+"&limit=5",
+		type:"GET",
+		success:function(data){
+			if(e)	e.preventDefault();
+			if(data!=0)
+			{
+				var str="";
+				$('#lm').html('');
+				if(isRefresh==1){$('#commentsDiv').html(''); $('#lm').html('');}
+				document.querySelector('#commentsDiv').insertAdjacentHTML('beforeend', data);
+				//$('#remarksDiv').append(data);
+				str="<div id='lm'><a href='#' onclick='getCommentsHistory(\""+rowId+"\", "+(parseInt(start)+5)+",0, "+$(this).event+");'>Load More . . .</a></div>";
+				document.querySelector('#commentsDiv').insertAdjacentHTML('beforeend', str);
+				$(document).scrollTop($(document).height());
+				if($('#commentsDiv .card:first').length>0)
+				{
+			        var firstMsg = $('#commentsDiv .card:first');
+			        // Store current scroll/offset
+			        var curOffset = firstMsg.offset().top - $(document).scrollTop();
+			        
+			        // Add your new messages
+			        firstMsg.before($('#commentsDiv .card').eq(5).clone());
+			        firstMsg.before($('#commentsDiv .card').eq(5).clone());
+			        firstMsg.before($('#commentsDiv .card').eq(5).clone());
+			       
+			        $(document).scrollTop(firstMsg.offset().top-curOffset);
+				}
+			}
+			else if(data==0)
+			{ 
+				$('#lm').html('');
+				$(document).scrollTop($(document).height());
+				if($('#commentsDiv .card:first').length>0)
+				{
+			        var firstMsg = $('#commentsDiv .card:first');
+			        // Store current scroll/offset
+			        var curOffset = firstMsg.offset().top - $(document).scrollTop();
+			        
+			        // Add your new messages
+			        firstMsg.before($('#commentsDiv .card').eq(5).clone());
+			        firstMsg.before($('#commentsDiv .card').eq(5).clone());
+			        firstMsg.before($('#commentsDiv .card').eq(5).clone());
+			       
+			        $(document).scrollTop(firstMsg.offset().top-curOffset);
+				 }
+			 }
+		}
+	});
 }
 
 function SwalConfrm(msg)

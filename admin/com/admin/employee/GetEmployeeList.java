@@ -13,9 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.json.*;
 import com.data.MySql.MySqlConnect;
-/**
- * Servlet implementation class getClientJson
- */
+
 @WebServlet("/GetEmployeeList")
 public class GetEmployeeList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,7 +23,7 @@ public class GetEmployeeList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
 	    PrintWriter out=response.getWriter();
-	    HttpSession session = request.getSession();	  
+	    HttpSession session = request.getSession();
 	    String sql = "SELECT * FROM stylrite_general.employeelist where 1=1 ";
 	    if(request.getParameter("cid")!=null) {
 	    	sql+=" AND rowId="+session.getAttribute("userId").toString()+"";

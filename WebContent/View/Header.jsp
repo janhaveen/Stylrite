@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://localhost:8083/Stylrite/css/Bootstrap/Style.css">
+    <link rel="stylesheet" href="http://localhost:8080/Stylrite/css/Bootstrap/Style.css">
    	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
    	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
@@ -18,8 +18,10 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" src="http://localhost:8083/Stylrite/js/General/IDGenerator.js"></script> 
-    <script type="text/javascript" src="http://localhost:8083/Stylrite/js/General/DataExport.js"></script> 
+    <script type="text/javascript" src="http://localhost:8080/Stylrite/js/General/IDGenerator.js"></script> 
+    <script type="text/javascript" src="http://localhost:8080/Stylrite/js/General/DataExport.js"></script> 
+    <link href="https://cdn.jsdelivr.net/sweetalert2/6.4.1/sweetalert2.css" rel="stylesheet"/>
+	<script src="https://cdn.jsdelivr.net/sweetalert2/6.4.1/sweetalert2.js"></script>
     <style type="text/css">
        body, .form-control {
 		    font-size: 90% !important;
@@ -42,14 +44,14 @@
     <div id="mySidenav" class="sidenav">
     	<input type="hidden" id="designationHeader" value="<%=session.getAttribute("designationTxt")%>"> 
     	<input type="hidden" id="departmentHeader" value="<%=session.getAttribute("departmentTxt")%>"> 
-        	<a href="http://localhost:8083/Stylrite/View/UserHome.jsp" style="padding:  0px;margin-left: 6%;"><img style="width: 90%;margin-top: -5%;" src="http://localhost:8083/Stylrite/img/CompanyLogo.png" class="CompanyLogo"></a>
+        	<a href="http://localhost:8080/Stylrite/View/UserHome.jsp" style="padding:  0px;margin-left: 6%;"><img style="width: 90%;margin-top: -5%;" src="http://localhost:8080/Stylrite/img/CompanyLogo.png" class="CompanyLogo"></a>
 			
 			<div class="collapsible">
 			  <li id="100001">
 			  	<a class="collapsible-header waves-effect arrow-r" data-toggle="collapse" data-target="#Admin"><i class="fas fa-cogs"></i> Admin <i class="fa fa-angle-down pull-right"  ></i></a>
                	 <div class="collapse" id="Admin">
                		<ul>
-               			<li id="100003"><a href="http://localhost:8083/Stylrite/View/Employee/JSPs/Employee.jsp" class="waves-effect">Employee</a>
+               			<li id="100003"><a href="http://localhost:8080/Stylrite/View/Employee/JSPs/Employee.jsp" class="waves-effect">Employee</a>
                          </li>
                		</ul>
               	  </div>
@@ -58,40 +60,35 @@
 				  	<a class="collapsible-header waves-effect arrow-r" data-toggle="collapse" data-target="#Inventory"><i class="fas fa-calendar-alt"></i> Inventory <i class="fa fa-angle-down pull-right"  ></i></a>
 	               	 <div class="collapse" id="Inventory">
 	               		<ul>
-	               			<li id="100003"><a href="http://localhost:8083/Stylrite/View/Product/JSPs/Product.jsp" class="waves-effect">Product</a>
-	                         </li>
-	                         <li id="100003"><a href="http://localhost:8083/Stylrite/View/StockIn/JSPs/StockIn.jsp" class="waves-effect">Stock In</a>
-	                         </li>
-	                         <li id="100003"><a href="http://localhost:8083/Stylrite/View/StockIn/JSPs/StockInUsingGRN.jsp" class="waves-effect">Stock In Using GRN</a>
-	                         </li>
-	                         <li id="100003"><a href="http://localhost:8083/Stylrite/View/StockIn/JSPs/StockTransfer.jsp" class="waves-effect">Stock Transfer</a>
-	                         </li>
-	                         <li id="100003"><a href="http://localhost:8083/Stylrite/View/StockIn/JSPs/EmptyBox.jsp?p=1" class="waves-effect">Remove Boxes</a>
-	                         </li>
-	                         <li id="100003"><a href="http://localhost:8083/Stylrite/View/StockIn/JSPs/EmptyBox.jsp?p=2" class="waves-effect">Reprint Removed Boxes</a>
+	               			<li id="100003"><a href="http://localhost:8080/Stylrite/View/Product/JSPs/Product.jsp" class="waves-effect">Product</a>
 	                         </li>
 	               		</ul>
 	              	  </div>
 	             </li>
-	             <li id="100001">
-				  	<a class="collapsible-header waves-effect arrow-r" data-toggle="collapse" data-target="#Sample"><i class="fab fa-wpforms"></i> Sample <i class="fa fa-angle-down pull-right"  ></i></a>
-	               	 <div class="collapse" id="Sample">
-	               		<ul>
-	               			<li id="100003"><a href="http://localhost:8083/Stylrite/View/Samples/JSPs/Sample.jsp?for=newSample" class="waves-effect">New Sample</a>
-	                         </li>
-	                         <li id="100003"><a href="http://localhost:8083/Stylrite/View/Samples/JSPs/Sample.jsp?for=sampleListInvtAccp" class="waves-effect">Stock Out</a>
-	                         </li>
-	                         <li id="100003"><a href="http://localhost:8083/Stylrite/View/Samples/JSPs/Sample.jsp?for=sampleListDispatched" class="waves-effect">Dispatched</a>
-	                         </li>
-	                         <li id="100003"><a href="http://localhost:8083/Stylrite/View/Samples/JSPs/Sample.jsp?for=sampleListRdyToRcv" class="waves-effect">Ready To Receive</a>
-	                         </li>
-	                         <li id="100003"><a href="http://localhost:8083/Stylrite/View/Samples/JSPs/Sample.jsp?for=sampleListView" class="waves-effect">View Sample List</a>
-	                         </li>
-	                         <li id="100003"><a href="http://localhost:8083/Stylrite/View/Samples/JSPs/SampleTransfer.jsp?for=sampleListView" class="waves-effect">Sample Transfer</a>
-	                         </li>
-	               		</ul>
-	              	  </div>
-	             </li>
+				<a href="http://localhost:8080/Stylrite/View/Samples/JSPs/Sample.jsp?for=newSample" class="mg waves-effect">
+					<i class="fas fa-angle-double-right"></i>
+					New Sample
+				</a>
+				<a href="http://localhost:8080/Stylrite/View/Samples/JSPs/Sample.jsp?for=sampleListInvtAccp" class="mg waves-effect">
+					<i class="fas fa-angle-double-right"></i>
+					Stock Out
+				</a>
+				<a href="http://localhost:8080/Stylrite/View/Samples/JSPs/Sample.jsp?for=sampleListDispatched" class="mg waves-effect">
+					<i class="fas fa-angle-double-right"></i>
+					Dispatched
+				</a>
+				<a href="http://localhost:8080/Stylrite/View/Samples/JSPs/Sample.jsp?for=sampleListRdyToRcv" class="mg waves-effect">
+					<i class="fas fa-angle-double-right"></i>
+					Ready To Receive
+				</a>
+				<a href="http://localhost:8080/Stylrite/View/Samples/JSPs/Sample.jsp?for=sampleListView" class="mg waves-effect">
+					<i class="fas fa-angle-double-right"></i>
+					View Sample List
+				</a>
+				<!-- <a href="http://localhost:8080/Stylrite/View/Samples/JSPs/Sample.jsp?for=sampleListView" class="mg waves-effect">
+					<i class="fas fa-angle-double-right"></i>
+					View Sample List
+				</a> -->
 			</div>
     </div>
     <nav class="navbar navbar-expand-sm navbar-dark sticky-top">
@@ -109,7 +106,7 @@
                     <i class="fa fa-user"></i> <span class="clearfix d-none d-sm-inline-block" style="font-size:15px;"><%=session.getAttribute("userName") %></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown" style="margin-right: 1%;">
-                    <a class="dropdown-item" href="http://localhost:8083/Stylrite/LogOut">Log Out</a>
+                    <a class="dropdown-item" href="http://localhost:8080/Stylrite/LogOut">Log Out</a>
                     <a class="dropdown-item" href="#">My account</a>
                 </div>
             </li>

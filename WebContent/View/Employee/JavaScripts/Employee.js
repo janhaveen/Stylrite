@@ -1,5 +1,4 @@
 $(document).ready(function(){
-		
 	$('#newElementForm').on('focusout', '#mobileno', function() {
 	    var mobile = document.querySelector('#mobileno').value;
 	    var selectedEmployeeId = document.querySelector('#selectedEmployeeId').value;

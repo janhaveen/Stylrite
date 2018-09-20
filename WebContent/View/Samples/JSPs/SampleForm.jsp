@@ -56,60 +56,71 @@
 	        </div>
         	</form>
     </div>
-    <%@include file="../../Product/JSPs/ProductList.jsp" %><!-- <br> -->
     </div><!-- <br> -->
-   	
+   	<%@include file="../../Product/JSPs/ProductList.jsp" %><!-- <br> -->
     <div class="card HideThisElement" id="SampleFormProductListDiv">
 	    <div class="card-body" style="padding-bottom: 0;">
     		<h5 class="card-title">Product Info</h5><!-- <hr> -->
-			<div class="alert alert-warning HideThisElement row" id="alertMessage" style="background-color: #ffbb33">
-                <!-- <div class="col-md-10">
-					<p id="alertPTag"></p>
-                </div>
-                <div class="col-md-2">
-					<button type="button" class="btn btn-primary btn-sm" id="alertConfirmBtn">Confirm</button>
-					<button type="button" class="btn btn-primary btn-sm" id="alertCloseBtn">Close</button>
-				</div> -->
-			</div>
+	        <ul class="nav nav-tabs" id="myTab" role="tablist">
+	            <li class="nav-item">
+	                <a class="nav-link active" id="ProductDetails-tab" data-toggle="tab" href="#ProductDetails" role="tab" aria-controls="ProductDetails" aria-selected="true">Products</a>
+	            </li>
+	            <li class="nav-item">
+	                <a class="nav-link" id="CommentsDetails-tab" data-toggle="tab" href="#CommentsDetails" role="tab" aria-controls="CommentsDetails" aria-selected="false">Comments</a>
+	            </li>
+	        </ul>
+			<div class="alert alert-warning HideThisElement row" id="alertMessage" style="background-color: #ffbb33"></div>
 	        <div class="alert alert-danger HideThisElement" id="errorMessage"></div>
 	        <div class="alert alert-success HideThisElement" id="successMessage"></div>
-	    	<table id="ProductData" class="table table-hover mb-0 nowrap">
-			    <thead>
-			        <tr id="headerrow" class="" style="text-align: center;">
-			            <th class="HideActionClass">Action</th>
-			            <th>SKU ID</th>
-			            <th>Product Info</th>
-			            <th class="HideStatusClass">Product Status</th>
-			            <th class="HideActionClass">Barcode</th>
-			        </tr>
-			    </thead>
-			    <tbody id="ProductDataBody" style="text-align: center;"></tbody>
-			</table><br>
-	        <div class="row HideThisElement" id="updateBtnDiv">
-                <div class="form-group col-md-6" style="margin: 0;">
-                	<div class="form-group">
-                    	<label id="updateRemarksLbl" for="updateRemarks" class="">Remarks</label>
-                		<textarea class="form-control" rows="5" id="updateRemarks" placeholder="Enter Remarks"></textarea>
-                    </div>
-                </div>
-                <div class="form-group col-md-6" style="margin: 0;padding-top: 28px;">
-			        <div class="row">
-                		<div class="form-group col-md-12">
-			        		<button type="button" class="btn btn-primary HideThisElement" id="SubmitButtonUpdate">Update</button>
-                		</div>
+	        <div class="tab-content" id="myTabContent">
+	            <div class="tab-pane fade show active" id="ProductDetails" role="tabpanel" aria-labelledby="ProductDetails-tab">
+			    	<table id="ProductData" class="table table-hover mb-0 nowrap">
+					    <thead>
+					        <tr id="headerrow" class="" style="text-align: center;">
+					            <th class="HideActionClass">Action</th>
+					            <th>SKU ID</th>
+					            <th>Product Info</th>
+					            <th class="HideStatusClass">Product Status</th>
+					        </tr>
+					    </thead>
+					    <tbody id="ProductDataBody" style="text-align: center;"></tbody>
+					</table><br>
+			        <div class="row HideThisElement" id="updateBtnDiv">
+		                <div class="form-group col-md-6" style="margin: 0;">
+		                	<div class="form-group">
+		                    	<label id="updateRemarksLbl" for="updateRemarks" class="">Remarks</label>
+		                		<textarea class="form-control" rows="5" id="updateRemarks" placeholder="Enter Remarks"></textarea>
+		                    </div>
+		                </div>
+		                <div class="form-group col-md-6" style="margin: 0;padding-top: 28px;">
+					        <div class="row">
+		                		<div class="form-group col-md-12">
+					        		<button type="button" class="btn btn-primary HideThisElement" id="SubmitButtonUpdate">Update</button>
+		                		</div>
+					        </div>
+					        <div class="row">
+		                		<div class="form-group col-md-12">
+					        		<button type="button" class="btn btn-primary" id="BackButtonUpdate">Back</button>
+		                		</div>
+					        </div>
+		                </div>
 			        </div>
-			        <div class="row">
-                		<div class="form-group col-md-12">
-			        		<button type="button" class="btn btn-primary" id="BackButtonUpdate">Back</button>
-                		</div>
-			        </div>
-                </div>
+			        <div class="left HideThisElement" id="submitBtnDiv">
+				        <button type="button" class="btn btn-primary" id="DeleteProduct">Delete</button>
+				        <button type="button" class="btn btn-primary" id="SubmitButtonRegister">Submit</button>
+				        <!-- <button type="button" class="btn btn-primary" id="BackButtonSubmit">Back</button> -->
+				    </div>
+	            </div>
+	            <div class="tab-pane fade" id="CommentsDetails" role="tabpanel" aria-labelledby="CommentsDetails-tab">
+				    <div id="commDiv" class="">
+				    	<label id="commentsLbl" for="comments" class="">Comments</label>	
+				        <textarea rows="4" class="md-textarea  form-control" id="newcomments" name="comments" style="height: 4rem;overflow-y: auto;"></textarea><br>
+				        <input type="button" id="SubmitButtonRegisterComments" value="Save" class="btn btn-info btn-rounded">
+				        <input type="button" id="SubmitButtonCancelComments" value="Cancel" class="btn btn-info-outline btn-rounded"><hr>
+				    </div>
+				    <div id="commentsDiv"></div> 
+	            </div>
 	        </div>
-	        <div class="left HideThisElement" id="submitBtnDiv">
-		        <button type="button" class="btn btn-primary" id="DeleteProduct">Delete</button>
-		        <button type="button" class="btn btn-primary" id="SubmitButtonRegister">Submit</button>
-		        <!-- <button type="button" class="btn btn-primary" id="BackButtonSubmit">Back</button> -->
-		    </div>
 	    </div>
     </div>
     <div class="card HideThisElement" id="SampleFormDispatchDiv">

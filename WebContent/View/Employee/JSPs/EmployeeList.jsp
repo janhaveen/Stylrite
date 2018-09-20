@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,17 +34,6 @@
 		            <th>Report To</th>
 		            <th>Status</th>
 		        </tr>
-		        <!-- <tr id="filterrow">
-		            <td></td>
-		            <th>Employee Name</th>
-		            <th>Department</th>
-		            <th>Designation</th>
-		            <th>User ID</th>
-		            <th>Mobile No</th>
-		            <th>Email ID</th>
-		            <th>Report To</th>
-		            <th>Status</th>
-		        </tr> -->
 		    </thead>
 		</table>
     </div>

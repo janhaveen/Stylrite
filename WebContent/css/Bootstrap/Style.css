@@ -44,8 +44,7 @@ body {
     top: 0;
     left: 0;
     /* background-color: #ece1bd; */
-    /* background: linear-gradient(40deg, #f0d984,#85858c, #666260); */
-    background: linear-gradient(40deg, #f0d984,#a2a0a0, #f5cb2f);    
+    background: linear-gradient(40deg, #f0d984,#85858c, #666260);
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;

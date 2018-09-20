@@ -8,7 +8,7 @@ $(document).ready(function(){
             .search(this.value)
             .draw();
     });
-    var actionStr="", str="?1=1"; var i=0;
+    var actionStr=""; var i=0;
     if(window.location.href.indexOf("Product.jsp")>=0){
     	actionStr='<i class="edit_me fa fa-pencil-alt fa-2x" aria-hidden="true"></i> '+
 	     		'<i class="delete_me fa fa-trash fa-2x " aria-hidden="true"></i>';
@@ -19,12 +19,7 @@ $(document).ready(function(){
     }else if(window.location.href.indexOf("JSPs/Order.jsp")>=0){
     	actionStr='<i class="select_me_order fa fa-check fa-2x" aria-hidden="true"></i> ';
     	i=5;
-    }else{
-    	actionStr='<i class="select_me fa fa-check fa-2x" aria-hidden="true"></i> ';
-    	i=5;
     }
-    
-   
 	var table = $('#ProductDatatables').DataTable( {
         buttons: [
             {
@@ -35,13 +30,14 @@ $(document).ready(function(){
             }
         ],dom: 'Bfrtip',
 		"bLengthChange": false,
+		"bServerSide": false,
 		"iDisplayLength":i,
 		"searching": true,
 		"orderCellsTop": true ,
 		"sScrollX": "100%",
         "sScrollXInner": "100%",
         "bScrollCollapse": true,
-		"ajax": "../../../GetProductList"+str,
+		"ajax": "../../../GetProductList",
 		"columns": [
         	 {
              	className: "center",

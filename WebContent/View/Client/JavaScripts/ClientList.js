@@ -1,10 +1,5 @@
 $(document).ready(function(){
 	$('#datatables').DataTable().destroy();
-
-	dropdownFunctionForState();
-	DropDownForLegend();
-	DropDownForEmployee("");
-    
 	
 	$('#datatables thead #filterrow th').each( function () {
     	var title = $(this).text();
@@ -64,6 +59,8 @@ $(document).ready(function(){
     });
 	
     $('#datatables tbody').off('click');
+	DropDownForEmployee("");
+	DropDownForLegend();
 	
 	$('#datatables tbody').on('click', '.edit_me', function() {
 		var data = table.row($(this).parents('tr')).data();
@@ -86,7 +83,10 @@ $(document).ready(function(){
 //		$("#customerType").val(data.customerType);
 		$("#creditTime").val(data.creditTime);
 		$("#creditLimit").val(data.creditLimit);
+//		console.log($("#salesPerson").html());
 		$("#salesPerson").val(data.salesPerson);
+		console.log(data.salesPerson);
+		//$("#salesPerson").selectmenu("refresh");
 		$("#source").val(data.source);
 
 	    $("#ClientTableDiv").addClass("HideThisElement");
@@ -99,6 +99,10 @@ $(document).ready(function(){
 		$("#errorMessage").addClass("HideThisElement");
 		$("#successMessage").addClass("HideThisElement");
 		
+		/*dropdownFunctionForState();
+		DropDownForLegend();
+		DropDownForEmployee("");*/
+	    
 		$("#ClientViewDiv").addClass("HideThisElement");
 		$("#ClientFormDiv").removeClass("HideThisElement");
 		

@@ -16,6 +16,7 @@ body{ background: #ffffff00 !important;}
   border-radius: 2px;
   margin: 10px auto 30px;
   max-width: 38%;
+  padding: 50px 70px 70px 71px;
 }
 
 .login-form .form-group {

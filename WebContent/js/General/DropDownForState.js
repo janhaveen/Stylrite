@@ -22,9 +22,12 @@ function dropdownFunctionForState(){
 		    
 		    function createHTML6(Data) {
 		    	var options6= [];
-		    	var selectBox2 = document.getElementById("state");
-		    	var selectBox3 = document.getElementById("state");
-		    	$("#newCustomerForm #state option").each(function(index, option) {
+		    	/*var selectBox2 = document.getElementById("state");
+		    	var selectBox3 = document.getElementById("state");*/
+		    	$("#newElementForm #inputState option").each(function(index, option) {
+		            $(option).remove();
+		       });
+		    	$("#newVendorForm #inputState option").each(function(index, option) {
 		            $(option).remove();
 		       });
 		    	$("#state option").each(function(index, option) {
@@ -44,9 +47,9 @@ function dropdownFunctionForState(){
 		        	if (Data.data[i].statetype === "State") 
 		        		options6.push("<option value='" + Data.data[i].rowno + "'>" + Data.data[i].state + "</option>");
 		        }
-		        $('#newCustomerForm #state').append(options6.join(""));
-		        $('#state').append(options6.join(""));
-		        //$('#newCustomerForm #state').material_select('enable');
+		        $('#newElementForm #inputState').append(options6.join(""));
+		    	$("#newVendorForm #inputState").append(options6.join(""));
+//		        $('#newCustomerForm #state').material_select('enable');
 		        //$( "#newCustomerForm #state" ).material_select( "refresh" );
 		        
 		        //$('#state').append(options6.join("")).material_select();

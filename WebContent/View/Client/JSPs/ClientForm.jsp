@@ -123,7 +123,7 @@
 	                        <input type="text" class="form-control validate" id="creditLimit" name="creditLimit"  placeholder="Credit Limit">
 	                    </div>
 	                	<div class="form-group col-md-4">
-	                        <label for="customerType">Sales Person <span class="mandatory-element">*</span></label>
+	                        <label for="salesPerson">Sales Person <span class="mandatory-element">*</span></label>
 	                        <select class="form-control" id="salesPerson" name="salesPerson">
 	                        </select>
 	                    </div>
