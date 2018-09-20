@@ -52,7 +52,7 @@ $(document).ready(function(){
 	    var data = table.row($(this).parents('tr')).data();
 	    document.getElementById("newElementForm").reset();
 		DropDownForLegend();
-		dropdownFunctionForManager();
+//		dropdownFunctionForManager();
 		dropdownFunctionForState();
 	    document.querySelector('#selectedEmployeeId').value = data.employeeId;
 	    

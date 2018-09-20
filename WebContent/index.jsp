@@ -8,9 +8,7 @@
     <title>Log In</title>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://localhost:8083/Stylrite/css/Bootstrap/login.css">
-    <link rel="stylesheet" href="http://localhost:8083/Stylrite/css/Bootstrap/Style.css">
-    
+    <link rel="stylesheet" href="http://localhost:8080/Stylrite/css/Bootstrap/login.css">
     <!-- Font Awesome -->
     <!-- <link rel="stylesheet" href="css/fontawesome-all.css">
     Bootstrap core CSS
@@ -20,23 +18,21 @@
     Your custom styles (optional)
     <link href="css/style.css" rel="stylesheet"> -->
     
-    <link rel="shortcut icon" href="http://localhost:8083/Stylrite/img/TitleImage.png">
+    <link rel="shortcut icon" href="img/TitleImage.png">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
   </head>
 <body id="LoginForm">
-<div class="container" style="margin-top: 5%;">
-
+<div class="container">
+<img style="width: 24%;margin: 0% 39%;" src="http://localhost:8080/Stylrite/img/CompanyLogo.png" class="CompanyLogo">
 <div class="login-form">
-<div class="main-div" style="padding: 4%;">
+<div class="main-div">
     <div class="panel">
-     <img style="width: 76%;margin-bottom:  5%;margin-top: -12%;" src="http://localhost:8083/Stylrite/img/CompanyLogo.png" class="CompanyLogo">
+     <h2>Sign In</h2>
+   	  <p>Please enter your Username and Password</p>
     	<form id="LogInForm">
-	    	<div class="alert alert-warning HideThisElement" id="alertMessage" style="background-color: #ffbb33"></div>
-	        <div class="alert alert-danger HideThisElement" id="errorMessage"></div>
-	        <div class="alert alert-success HideThisElement" id="successMessage"></div>
             <div class="form-group">
                <i class="fas fa-user prefix"></i>
                <input type="text" id="userId" placeholder="Username" name="userId" class="form-control">
@@ -124,11 +120,13 @@
 
     <!-- SCRIPTS -->
     <!-- JQuery -->
-    <script src="https:////code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap tooltips -->
-   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
 	
 	<script type="text/javascript">
 	$(function() {
@@ -142,9 +140,7 @@
 	               {
 	            	   // show response from the servlet.
 	            	   if (data == 0) {
-	            		  // toastr.error('User Name or Password is Incorrect!');
-	            		   document.querySelector('#errorMessage').innerHTML = "<strong>Error!</strong> User Name or Password is Incorrect!";
-						   $("#errorMessage").removeClass("HideThisElement");
+	            		   toastr.error('User Name or Password is Incorrect!');
 	            		   
 						} else {
 							location='StartSession?department='+data;

@@ -198,7 +198,6 @@ function getProducts(rowId) {
 				  '<td id="chck'+data.data[i].productId+'" class="'+data.data[i].class+'">'+data.data[i].rqtnItmstatus_text+'</td>'+
 				  '<td style="display:none;" id="requitionItemId">'+data.data[i].rowId+'</td>'+
 				  '<td style="display:none;">'+data.data[i].status+'</td>'+
-				  '<td class="HideActionClass"><input type="text" id="barcode'+data.data[i].productId+'" name="barcode' + data.data[i].productId + '" class="form-control" ></td>'+
 				  '</tr>';
 				document.querySelector('#ProductDataBody').insertAdjacentHTML('beforeend', newHtml);
 	    	}
@@ -226,7 +225,7 @@ function chckBox(id)
 
 function getRemarksHistory(rowId, start, isRefresh, e) {
 	$.ajax({
-		url:"../../../GetRequisitionRemarksHistory?requisitionId="+rowId+"&start="+start+"&limit=5",
+		url:"../../../GetRequisitionRemarksHistory?requisitionId="+rowId+"&action=321&start="+start+"&limit=5",
 		type:"GET",
 		success:function(data){ 
 			if(e)	e.preventDefault();
@@ -238,18 +237,18 @@ function getRemarksHistory(rowId, start, isRefresh, e) {
 				str="<div id='lm'><a href='#' onclick='getRemarksHistory(\""+rowId+"\", "+(parseInt(start)+5)+",0, "+$(this).event+");'>Load More . . .</a></div>";
 				document.querySelector('#remarksDiv').insertAdjacentHTML('beforeend', str);
 				$(document).scrollTop($(document).height());
-				if($('#remarksDiv .card:first').length>0){
-			        var firstMsg = $('#remarksDiv .card:first');
-			        // Store current scroll/offset
-			        var curOffset = firstMsg.offset().top - $(document).scrollTop();
-			        
-			        // Add your new messages
-			        firstMsg.before($('#remarksDiv .card').eq(5).clone());
-			        firstMsg.before($('#remarksDiv .card').eq(5).clone());
-			        firstMsg.before($('#remarksDiv .card').eq(5).clone());
-			       
-			        $(document).scrollTop(firstMsg.offset().top-curOffset);
-				}
+
+		        var firstMsg = $('#remarksDiv .card:first');
+		        // Store current scroll/offset
+		        var curOffset = firstMsg.offset().top - $(document).scrollTop();
+		        
+		        // Add your new messages
+		        firstMsg.before($('#remarksDiv .card').eq(5).clone());
+		        firstMsg.before($('#remarksDiv .card').eq(5).clone());
+		        firstMsg.before($('#remarksDiv .card').eq(5).clone());
+		       
+		        $(document).scrollTop(firstMsg.offset().top-curOffset);
+
 			}else if(data==0){ 
 				$('#lm').html('');
 				$(document).scrollTop($(document).height());

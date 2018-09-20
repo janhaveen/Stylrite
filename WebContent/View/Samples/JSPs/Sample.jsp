@@ -5,12 +5,6 @@
 <meta charset="UTF-8">
 <title>Sample</title>
 <link rel="shortcut icon" href="../../../img/TitleImage.png">
-<!-- <link href="https://cdn.jsdelivr.net/sweetalert2/6.4.1/sweetalert2.css" rel="stylesheet"/>
-<script src="https://cdn.jsdelivr.net/sweetalert2/6.4.1/sweetalert2.js"></script> -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.28/dist/sweetalert2.all.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script> -->
 <style type="text/css">
 	#prHr, .dt-buttons
 	{

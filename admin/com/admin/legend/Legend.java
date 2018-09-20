@@ -72,7 +72,7 @@ public class Legend {
          
         try { 
         	if(type.indexOf("insert") >=0) {
-	        	String sql = "INSERT INTO propel_legend.d_project_general_legend "
+	        	String sql = "INSERT INTO stylrite_legend.d_general_legend "
 						+ "( rowId, legendGroup, category, subCategory, description , projectId) VALUES "
 					+ "( ?, ?, ?, ?, ?, ?)";
 	            stmt = conn.prepareStatement(sql); 
@@ -83,7 +83,7 @@ public class Legend {
 	            stmt.setString(5, description);
 	            stmt.setString(6, projectId);
         	}else if(type.indexOf("update")>=0) {
-        		String sql = "update propel_legend.d_project_general_legend  set"
+        		String sql = "update stylrite_legend.d_general_legend  set"
     					+ " legendGroup = ?, category = ?, subCategory = ?, "
     					+ "description = ?, projectId=? "
     					+ "where rowId = ?";

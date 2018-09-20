@@ -8,8 +8,6 @@ $(document).ready(function(){
     		if(sessionPwd==Pwd)
     		{
 //    			matched=true;
-    			$("#errorMessage").addClass("HideThisElement");
-    			$("#successMessage").addClass("HideThisElement");
     			$("#pass").attr("disabled",false);
     			$("#cnfrmPass").attr("disabled",false);
     			$("#passLbl").removeClass("disabled");
@@ -18,9 +16,7 @@ $(document).ready(function(){
     		else
 			{
 //    			matched=false;
-    			$("#errorMessage").removeClass("HideThisElement");
-    			$("#successMessage").addClass("HideThisElement");
-                $("#errorMessage").html(' <strong>Error!</strong> Enter your current password !');
+    			toastr.error('Enter your current password !');
     			$("#pass").attr("disabled",true);
     			$("#cnfrmPass").attr("disabled",true);
     			$("#passLbl").addClass("disabled");
@@ -36,23 +32,15 @@ $(document).ready(function(){
     	var password=document.querySelector('#pass').value;
     		if(cnfpassword=="" || password=="")
     		{
-    			$("#errorMessage").removeClass("HideThisElement");
-    			$("#successMessage").addClass("HideThisElement");
-                $("#errorMessage").html(' <strong>Error!</strong> Please Enter The Password	!');
-    			//toastr.error('Please Enter The Password');
+    			toastr.error('Please Enter The Password');
     		}
     		else if(cnfpassword===password)
 			{
-    			$("#errorMessage").addClass("HideThisElement");
-    			$("#successMessage").addClass("HideThisElement");
     			$("#changeBtn").attr("disabled",false);
 			}
     		else
     		{
-    			$("#errorMessage").removeClass("HideThisElement");
-    			$("#successMessage").addClass("HideThisElement");
-                $("#errorMessage").html(' <strong>Error!</strong> Password Did Not Match !');
-    			//toastr.error('Password Did Not Match!');
+    			toastr.error('Password Did Not Match!');
     		}
 			return false;
     });
@@ -65,17 +53,12 @@ $(document).ready(function(){
             data:$("#LogInForm").serialize(),
             success: function(data)
             {
-                if (data.indexOf("0")>=0) {
-                	$("#errorMessage").removeClass("HideThisElement");
-        			$("#successMessage").addClass("HideThisElement");
-                    $("#errorMessage").html(' <strong>Error!</strong> Failed to Change Password !');
-                	//toastr.error('Failed to Change Password!');                	
+                if (data == 0) {
+                	toastr.error('Failed to Change Password!');
     			} else {
-    				$("#errorMessage").addClass("HideThisElement");
-        			$("#successMessage").removeClass("HideThisElement");
-                    $("#successMessage").html(' <strong>Success !</strong> Password Changed Successfully !');
-    				setTimeout(function(){window.location='../../../index.jsp';}, 3000);
-				}
+	    				toastr.success('Password Changed Successfully!');
+	    				setTimeout(function(){window.location='../../../index.jsp';}, 5000);
+    				}
             }
     	
     	});

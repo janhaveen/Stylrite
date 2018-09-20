@@ -1,6 +1,5 @@
 package com.admin.legend;
 
-
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,10 +18,6 @@ import org.json.*;
 
 import com.data.MySql.MySqlConnect;
 
-
-/**
- * Servlet implementation class getClientJson
- */
 @WebServlet("/GetLegendList")
 public class GetLegendList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -43,7 +38,7 @@ public class GetLegendList extends HttpServlet {
 				response.sendRedirect("index.jsp");
 		}
 	    */
-	    String sql = "SELECT * FROM stylrite_legend.generallegendlist where 1=1 ";
+	    String sql = "SELECT * FROM stylrite_legend.d_general_legend where 1=1 ";
 	    if(request.getParameter("type")!=null) {
 	    	sql+=" AND category='"+request.getParameter("type")+"'";
 	    }

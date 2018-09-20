@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<link rel="shortcut icon" href="../../../img/TitleImage.png">
 <title>Change Password</title>
 <!-- Font Awesome -->
     <style>
@@ -70,53 +69,51 @@
 <body class="fixed-sn white-skin">
 	<%@ include file="../../Header.jsp" %>
 	<main> <!--Section: Basic examples-->
-	<div class="container" >
-	<div class="card" style="margin: 5% 20%;">
-	<div class="" id="ChangePassword">
+	<div class="modal-dialog" id="ChangePassword">
 
 		<!--Form without header-->
 		<form action="" id="LogInForm" name="LogInForm">
-			<br><p class="h4 text-center">Change Password</p>
-	        <div class="alert alert-danger HideThisElement" id="errorMessage" style="margin: 0% 2%;"></div>
-	        <div class="alert alert-success HideThisElement" id="successMessage" style="margin: 0% 2%;"></div>
+			<p class="h5 text-center mb-4">Change Password</p>
 			<input type="hidden" id="cuntPassSession" name="cuntPassSession" class="form-control" value="${password}">
-			<br>
-			<div class="form-group col-md-12">
-				<label for="orangeForm-name">Current Password</label>
+
+			<div class="md-form">
 				<input type="password" id="cruntPass" name="cruntPass" class="form-control">
+				<label for="orangeForm-name">Current Password</label>
 			</div>
-			<div class="form-group col-md-12">
-				<label id="passLbl" name="passLbl" for="orangeForm-email" class="disabled">New Password</label>
-				<input type="password" id="pass" name="pass" class="form-control" disabled> 
+			<div class="md-form">
+				<input type="password" id="pass" name="pass" class="form-control" disabled> <label
+					id="passLbl" name="passLbl" for="orangeForm-email" class="disabled">New Password</label>
 			</div>
 
-			<div class="form-group col-md-12">
-				<label id="cnfrmPassLbl" name="cnfrmPassLbl" for="orangeForm-pass" class="disabled">Confirm password</label>
+			<div class="md-form">
 				<input type="password" id="cnfrmPass" name="cnfrmPass" class="form-control" disabled>
+				<label id="cnfrmPassLbl" name="cnfrmPassLbl" for="orangeForm-pass" class="disabled">Confirm password</label>
 			</div>
-			
+
 			<div class="text-center">
 				<button class="btn btn-deep-orange" id="changeBtn" name="changeBtn" disabled>Change</button>
 			</div>
-<br>
+
 		</form>
-	</div>
-	</div>
 	</div>
 	</main>
 	<script type="text/javascript"
-		src="../JavaScripts/ChangePassword.js"></script>
+		src="../../../JavaScripts/Admin/Employee/ChangePassword.js"></script>
 	<script>
+		$(document).ready(function() {
+			$('#datatables').DataTable();
+		});
+
 		// Material Select Initialization
-		/* $(document).ready(function() {
+		$(document).ready(function() {
 			$('select[name="datatables_length"]').material_select();
 		});
 
 		$(document).ready(function() {
 			$('.mdb-select').material_select();
-		}); */
+		});
 
-		//$('.datepicker').pickadate();
+		$('.datepicker').pickadate();
 	</script>
 </body>
 </html>

@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import com.data.MySql.MySqlConnect;
-public class Employee  {
+public class Employee {
     Connection conn = null;
     PreparedStatement stmt = null;
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
