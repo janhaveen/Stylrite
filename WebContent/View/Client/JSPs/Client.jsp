@@ -17,6 +17,7 @@
 		</div>
 	</div>
 </body>
+<!-- this test comment -->
 <script type="text/javascript" src="../JavaScripts/ClientList.js"></script>
 <script type="text/javascript" src="../JavaScripts/Client.js"></script>
 <script type="text/javascript" src="../JavaScripts/ContactPersonList.js"></script>
