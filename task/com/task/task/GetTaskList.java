@@ -26,10 +26,11 @@ public class GetTaskList extends HttpServlet {
 		response.setContentType("application/json");
 	    PrintWriter out=response.getWriter();
 	    HttpSession session = request.getSession();	  
-	    String sql = "SELECT * FROM stylrite_general.tasklist where 1=1 ";
+	    String sql = "SELECT * FROM propel_general.tasklist where 1=1 ";
 	    if(request.getParameter("TaskId")!=null) {
 	    	sql+=" AND rowId='"+request.getParameter("TaskId")+"'";
 	    }
+	    
 	    System.out.println(sql);
 	    conn= MySqlConnect.DBConnection();
 		while (jArray.length()>0) {
@@ -46,8 +47,8 @@ public class GetTaskList extends HttpServlet {
 				 arrayObj.put("startDate", rs.getString("startDate")==null?"":rs.getString("startDate"));
 				 arrayObj.put("endDate", rs.getString("endDate")==null?"":rs.getString("endDate"));
 				 arrayObj.put("assignedTo", rs.getString("assignedTo")==null?"":rs.getString("assignedTo"));
-				 arrayObj.put("visibility", rs.getString("visibility")==null?"":rs.getString("visibility"));
-				 arrayObj.put("visibleTo", rs.getString("visibleTo")==null?"":rs.getString("visibleTo"));
+				/* arrayObj.put("visibility", rs.getString("visibility")==null?"":rs.getString("visibility"));
+				 arrayObj.put("visibleTo", rs.getString("visibleTo")==null?"":rs.getString("visibleTo"));*/
 				 arrayObj.put("priority", rs.getString("priority")==null?"":rs.getString("priority"));
 				 arrayObj.put("priority_txt", rs.getString("priority_txt")==null?"":rs.getString("priority_txt"));
 				 arrayObj.put("status", rs.getString("status")==null?"":rs.getString("status"));
@@ -56,10 +57,10 @@ public class GetTaskList extends HttpServlet {
 				 arrayObj.put("expired", rs.getString("expired")==null?"":rs.getString("expired"));
 				 arrayObj.put("assignedTo_txt", rs.getString("assignedTo_txt")==null?"":rs.getString("assignedTo_txt"));
 				 arrayObj.put("today", rs.getString("today")==null?"":rs.getString("today"));
-				 arrayObj.put("visibility_txt", rs.getString("visibility_txt")==null?"":rs.getString("visibility_txt"));
+				 arrayObj.put("endDateToShow", rs.getString("endDateToShow")==null?"":rs.getString("endDateToShow"));
 				 arrayObj.put("desc", "<i class=\"fas fa-2x fa-info-circle\" data-toggle=\"popover\" data-placement=\"top\" title=\"Description\" data-content=\""+rs.getString("description")+"\"></i>");
 				 arrayObj.put("StatusBtn", rs.getString("StatusBtn")==null?"":rs.getString("StatusBtn"));
-				 arrayObj.put("visibleTo_txt", rs.getString("visibleTo_txt")==null?"":rs.getString("visibleTo_txt"));
+				 arrayObj.put("assignedToCmp", rs.getString("assignedToCmp")==null?"":rs.getString("assignedToCmp"));
 
 				 jArray.put(arrayObj);
 			}

@@ -9,7 +9,7 @@ import com.data.MySql.MySqlConnect;
 import com.general.system.GetSystemDetails;
 import com.general.system.SystemDetails;
 
-public class TaskLog extends Task{
+public class ProjectTaskLog extends Task{
 	Connection conn = null;
     PreparedStatement stmt = null;
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -60,7 +60,7 @@ public class TaskLog extends Task{
 		boolean returnVal=false;
 		conn=MySqlConnect.DBConnection();  
         try {
-        	String sql = "INSERT INTO stylrite_general.f_task_logs "
+        	String sql = "INSERT INTO propel_general.f_task_logs "
         			+ "(rowId, TaskId, action, fromValue, toValue, remarks, "
         			+ " createdBy, createdOn) VALUES "
 					+ "( ?, ?, ?, ?, ?, ?, ?, ?)"; System.out.println(sql);

@@ -26,7 +26,7 @@ public class UpdateStatusForTask extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		HttpSession session=request.getSession();
 		Task t=new Task();
-		TaskLog tl=new TaskLog();
+		ProjectTaskLog tl=new ProjectTaskLog();
 		t.setTaskId(request.getParameter("TaskId"));
 		t.setStatus(request.getParameter("Status"));
 		

@@ -267,29 +267,7 @@ $(document).ready(function(){
 		$("#ClientViewDiv").addClass("HideThisElement");
 		$("#ClientFormDiv").addClass("HideThisElement");
     });
-    
-    $("#DeleteEmployeeConfirmed").click(function() {
-        var DeleteEmpId = document.querySelector('#DeleteEmpId').value;
-        $.ajax({
-            type: "GET",
-            url: '../../../ModifyEmployee?DeleteEmpId=' + DeleteEmpId,
-            success: function(data) {
-                if (data == 0) {
-                    $('#centralModalDangerDemo').modal('hide');
-                    $(".errorMsg").removeClass("HideThisElement");
-                    $("#errorMsg").html(' <strong>Error!</strong> Failed to Delete Employee!');
-                } else {
-                    $('#centralModalDangerDemo').modal('hide');
-                    $('#selectedEmployeeId').val('');
-                    $('#datatables').DataTable().ajax.reload();
-                    $(".successMsg").removeClass("HideThisElement");
-                    $("#successMsg").html(' <strong>Success!</strong>  Employee Deleted Successfully!');
-                }
-            }
-        })
-        return false; // avoid to execute the actual submit of the form.
-    });
-
+   
     $('#ProductDatatables tbody').on( 'click', '.select_me_sample', function () {
 		var generator = new IDGenerator();
     	var data = $('#ProductDatatables').DataTable().row($(this).parents('tr')).data();

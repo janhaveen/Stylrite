@@ -69,7 +69,7 @@ $(document).ready(function(){
 		$("#AssignedToText").text(data.assignedTo_txt);	$("#VisibilityText").text(data.visibility_txt);
 		$("#VisibilityToText").text(data.visibleTo_txt);
 		$("#PriorityText").text(data.priority_txt);	$("#StatusText").text(data.status_txt);
-		$("#TaskDescriptionText").text(data.description);
+		$("#TaskDescriptionText").html(data.description);
 		
 		$("#TaskId").val(data.TaskId); 
 		$("#taskNameOld").val(data.taskName);  $("#taskName").val(data.taskName); 
@@ -128,16 +128,17 @@ function loadBlankformForTask() {
 	$("#TaskTableDiv").addClass("HideThisElement");
 	$("#TaskFormDiv").removeClass("HideThisElement");
 	$("#TaskViewDiv").addClass("HideThisElement");
-	$("#action").val("insert");
+	$("#TaskForm #action").val("insert");
 	dropdownFunctionForTaskLegend();
 	DropDownForEmployee("");
 	var generator = new IDGenerator();
 	$("#TaskId").val("T"+ generator.generate());
+	$("#Status").val("123124567411");
 }
 
 function getCommentsHistory(rowId, start, isRefresh, e) {	
 	$.ajax({
-		url:"../../../GetCommentsHistory?TaskId="+rowId+"&start="+start+"&limit=5",
+		url:"../../../GetCommentsHistoryForTask?TaskId="+rowId+"&start="+start+"&limit=5",
 		type:"GET",
 		success:function(data){ 
 			if(e)	e.preventDefault();

@@ -32,7 +32,22 @@
                     <th>Status</th>
 		        </tr>
 		    </thead>
+		    <tbody id="SampleForspdatatablesBody"></tbody>
 		</table>
+		<hr>
+		<div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="reason">Transfer To <span class="mandatory-element">*</span></label>
+                <select class="form-control" id="TransferTo" name="TransferTo">
+                </select>
+            </div>
+          </div>
+		<%@include file="SampleTransferDetails.jsp" %>
+		<div class="left">
+	        <button type="button" class="btn btn-primary" id="SubmitSampleTransfer">Submit</button>
+	        <button type="button" class="btn btn-outline-primary" id="CancelSampleTransfer">Cancel</button>	        
+	        <!-- <button type="button" class="btn btn-primary" id="BackButtonSubmit">Back</button> -->
+	    </div>
     </div>
 </div>
 </body>

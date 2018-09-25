@@ -2,11 +2,24 @@ $(document).ready(function() {
 	
 	getTaskCards('cmp');getTaskCards('ip');getTaskCards('td');
 	
-	$('#AddReminder').click(function() {
-		if ($("#AddReminder").is(':checked'))
-		    	$("#ReminderDiv").removeClass('HideThisElement');
-		else
-			$("#ReminderDiv").addClass('HideThisElement');
+	if($("#ProjectId").val()!="null"){
+		$.ajax({
+			url:"../../../GetProjectList?projectid="+$("#ProjectId").val(),
+			type:"GET",
+			success:function(Data){
+				var options1;
+		    	$('#AssignedToCmp').empty();
+		        options1 = '<option value="" selected>Select Assigned To</option>'
+		        options1 += "<option value='" + Data.data[0].rowid + "'>" + Data.data[0].companyName + "</option>";
+		        options1 += "<option value='effex'>Effex</option>";
+		        $('#AssignedToCmp').html(options1);
+		        
+			}
+		});
+		dropdownFunctionForTaskLegend();
+	}
+	$('#AssignedToCmp').change(function() { 
+		getAssignedToEmpDropDown($(this).val());
 	});
 	
 	$("#SubmitButtonRegister").click(function() {
@@ -24,6 +37,7 @@ $(document).ready(function() {
     });
     
     $("#SubmitButtonBackFromView").click(function() {
+    	getTaskCards('cmp');getTaskCards('ip');getTaskCards('td');
 	    $("#TaskTableDiv").removeClass("HideThisElement");
 		$("#TaskViewDiv").addClass("HideThisElement");
 		$("#TaskFormDiv").addClass("HideThisElement");
@@ -35,7 +49,7 @@ $(document).ready(function() {
 	
 	$("#SubmitButtonRegisterComments").click(function() {
 		$.ajax({
-			url:"../../../UpdateComments",
+			url:"../../../UpdateTaskComments",
 			data:{TaskId:$("#TaskId").val(),comments: $("#newcomments").val()},
 			type:"POST",
 			success:function(data){
@@ -46,43 +60,50 @@ $(document).ready(function() {
 		});
 	});
 	
+	$("#DeleteConfirmed").click(function() {
+        var DeleteId = document.querySelector('#DeleteId').value;
+        $.ajax({
+            type: "GET",
+            url: '../../../ModifyTask?id=' + DeleteId,
+            success: function(data) {
+                if (data == 0) {
+                    $('#centralModalDangerDemo').modal('hide');
+                    $(".successMsg").addClass("HideThisElement");
+                    $(".errorMsg").removeClass("HideThisElement");
+                    $("#errorMsg").html(' <strong>Error!</strong> Failed to Delete Task!');
+                } else {
+                    $('#centralModalDangerDemo').modal('hide');
+                    $('#DeleteId').val('');
+                    getTaskCards('cmp');getTaskCards('ip');getTaskCards('td');
+                    $(".errorMsg").addClass("HideThisElement");
+                    $(".successMsg").removeClass("HideThisElement");
+                    $("#successMsg").html(' <strong>Success!</strong>  Task Deleted Successfully!');
+                }
+            }
+        })
+        return false; // avoid to execute the actual submit of the form.
+    });
+	
 });
 
-function formSubmit(type){ console.log(type);	
+function formSubmit(){ 
+	var type=$("#TaskForm #action").val();
+	console.log(type);	
 	if (document.getElementById("taskName").value == "") { 
 		document.querySelector('#alertMessage').innerHTML = "<strong>Warning!</strong> Task Name is mandatory !";
 		$("#alertMessage").removeClass("HideThisElement"); 
-	} else if (document.getElementById("StartDate").value == "") {
-		document.querySelector('#alertMessage').innerHTML = "<strong>Warning!</strong> Start Date is mandatory !";
-		$("#alertMessage").removeClass("HideThisElement");
-	} else if (document.getElementById("EndDate").value == "") {
-		document.querySelector('#alertMessage').innerHTML = "<strong>Warning!</strong> End Date is mandatory !";
-		$("#alertMessage").removeClass("HideThisElement");
-	} else if (document.getElementById("AssignedTo").value == "") {
-		document.querySelector('#alertMessage').innerHTML = "<strong>Warning!</strong> Assigned To is mandatory !";
-		$("#alertMessage").removeClass("HideThisElement");
-	} else if (document.getElementById("Visibility").value ==  "") {
-		document.querySelector('#alertMessage').innerHTML = "<strong>Warning!</strong> Visibility is not selected !";
-		$("#alertMessage").removeClass("HideThisElement");
-	} else if (document.getElementById("VisibilityTo").value ==  "") {
-		document.querySelector('#alertMessage').innerHTML = "<strong>Warning!</strong> Visibile To is not selected !";
-		$("#alertMessage").removeClass("HideThisElement");
-	} else if (document.getElementById("Status").value ==  "") {
-		document.querySelector('#alertMessage').innerHTML = "<strong>Warning!</strong> Status is not selected !";
-		$("#alertMessage").removeClass("HideThisElement");
-	}else {
-	
+	} else {
 		$.ajax({
 	           type: "POST",
 	           url: "../../../ModifyTask",
-	           data: $("#TaskForm").serialize(), // serializes the form's elements.
+	           data: $("#TaskForm").serialize()+"&taskDescription="+escape($("#TaskForm .nicEdit-main").html()), // serializes the form's elements.
 	           success: function(data)
 	           {
 	               if (data == 1) {
 	            	   document.getElementById("TaskForm").reset();
 						$("#alertMessage").addClass("HideThisElement");
 						$("#errorMessage").addClass("HideThisElement");	
-						if(type=="new"){
+						if(type=="insert"){
 							document.querySelector('#successMessage').innerHTML = "<strong>Success!</strong> Task Registered Successfully !";
 							$("#successMessage").removeClass("HideThisElement");
 						}else{
@@ -92,10 +113,11 @@ function formSubmit(type){ console.log(type);
 						setTimeout(function(){
 							$("#TaskTableDiv").removeClass("HideThisElement");
 							$("#TaskFormDiv").addClass("HideThisElement");							
-							$('#datatables').DataTable().ajax.reload();	
+							//$('#datatables').DataTable().ajax.reload();	
+							getTaskCards('cmp');getTaskCards('ip');getTaskCards('td');
 						 }, 3000);		
 					} else{
-						if(type=="new"){
+						if(type=="insert"){
 							document.querySelector('#errorMessage').innerHTML = "<strong>Error!</strong> Failed to Register New Task !";
 							$("#errorMessage").removeClass("HideThisElement");
 						}else{
@@ -111,11 +133,6 @@ function formSubmit(type){ console.log(type);
 
 function updateStatus(id, statusOld, status) {
 	var statusPOA="";
-	/*if(status=="100001"){
-		statusPOA="100002";
-	}else if(status=="100002"){
-		statusPOA="100005";
-	}*/
 	$.ajax({
 		url:"../../../UpdateStatusForTask",
 		data:{TaskId:id, StatusOld: statusOld,Status:status},
@@ -126,7 +143,7 @@ function updateStatus(id, statusOld, status) {
 				type:"GET",
 				success:function(data){
 					$("#statusDivView").html(data.data[0].StatusBtn);
-					$("#O1").css('padding-left','20%');				
+					//$("#O1").css('padding-left','20%');				
 				}
 			});
 		}
@@ -134,8 +151,13 @@ function updateStatus(id, statusOld, status) {
 }
 
 function getTaskCards(type) {
+	var url="";
+	if($("#ProjectId").val()!="null")
+		url+="&ProjectId="+$("#ProjectId").val();
+	if($("#v").val()!="null")
+		url+="&viewOnly="+$("#v").val();
 	$.ajax({
-		url:"../../../GetTaskCards",
+		url:"../../../GetTaskCards?1=1"+url,
 		data:{status:type},
 		type:"GET",
 		success:function(data){
@@ -153,4 +175,64 @@ function getTaskCards(type) {
 			}
 		}
 	});
+}
+
+function getAssignedToEmpDropDown(id) {
+	$.ajax({
+		url:"../../../GetEmployeeForPOA?projectId="+id,
+		type:"GET",
+		success:function(Data){
+			var options1;
+	    	$('#AssignedTo').empty();
+	        options1 = '<option value="" selected>Select Assigned To</option>';
+	        for (var i = 0; i < Data.data.length; i++) {
+	        	 options1 += "<option value='" + Data.data[i].employeeId + "'>" + Data.data[i].empname + "</option>";
+			}
+	        $('#AssignedTo').html(options1);
+		}
+	});
+}
+
+function EditTask(id) {
+	$.ajax({
+		url:"../../../GetTaskList?TaskId="+id,
+		type:"GET",
+		success:function(Data){
+			var data=Data.data[0];
+			$("#TaskNameId").text(data.taskName); 
+			$("#StartDateText").text(data.startDate);	$("#EndDateText").text(data.endDate);
+			$("#AssignedToText").text(data.assignedTo_txt);	$("#VisibilityText").text(data.visibility_txt);
+			$("#VisibilityToText").text(data.visibleTo_txt);
+			$("#PriorityText").text(data.priority_txt);	$("#StatusText").text(data.status_txt);
+			$("#TaskDescriptionText").html(data.description);
+			$('#remarksDiv').html('');
+			$("#TaskForm #action").val("updat");
+			$("#TaskId").val(data.TaskId); 
+			$("#taskNameOld").val(data.taskName);  $("#taskName").val(data.taskName); 
+			$("#StartDateOld").val(data.startDate); $("#StartDate").val(data.startDate);
+			$("#EndDateOld").val(data.endDateToShow);		$("#EndDate").val(data.endDateToShow);
+			$('#AssignedToCmpOld').val(data.assignedToCmp);	$('#AssignedToCmp').val(data.assignedToCmp);
+			getAssignedToEmpDropDown(data.assignedToCmp);
+			$("#AssignedToOld").val(data.assignedTo);	$("#AssignedTo").val(data.assignedTo);	
+			$("#VisibilityOld").val(data.visibility);	$("#Visibility").val(data.visibility);
+			$("#VisibilityToOld").val(data.visibleTo); 	$("#VisibilityTo").val(data.visibleTo);
+			$("#PriorityOld").val(data.priority);	$("#Priority").val(data.priority);
+			$("#StatusOld").val(data.status); 	$("#Status").val(data.status);
+			$("#taskDescriptionOld").val(data.description); $("#taskDescription").val(data.description);
+			$("#TaskForm .nicEdit-main").html(data.description);
+			getCommentsHistory(data.TaskId, 0, 1);
+			
+			$("#statusDivView").html(data.StatusBtn);
+			//$("#O1").css('padding-left','20%');		
+			
+		    $("#TaskTableDiv").addClass("HideThisElement");
+			$("#TaskViewDiv").removeClass("HideThisElement");
+			$("#TaskFormDiv").addClass("HideThisElement");
+		}
+	});
+}
+
+function DeleteTask(id) {
+	document.querySelector('#DeleteId').value = id;
+	$('#centralModalDangerDemo').modal('show');
 }

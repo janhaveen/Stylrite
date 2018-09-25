@@ -6,7 +6,7 @@ function DropDownForEmployee(id) {
       if (ourRequest1.status >= 200 && ourRequest1.status < 400) {
     	data1 = JSON.parse(ourRequest1.responseText);
         createHTML1(data1);  createHTML2(data1); 
-        createHTML5(data1); createHTML6(data1);
+        createHTML5(data1); createHTML6(data1); createHTML7(data1);
       } else {
         console.log("We connected to the server, but it returned an error.");
       }
@@ -65,4 +65,15 @@ function DropDownForEmployee(id) {
         $('#VisibilityTo').html(options6);
     }
     
+    function createHTML7(Data) {
+    	var options7;
+    	$('#TransferTo').empty();
+        options7 = '<option value="" selected>Select Sales Person</option>';
+        for (i = 0; i < Data.data.length; i++)
+        {
+        	if (Data.data[i].department == "2" && Data.data[i].employeeId !="") 
+        		options7 += "<option value='" + Data.data[i].employeeId + "'>" + Data.data[i].employeeName + "</option>";
+        }
+        $('#TransferTo').html(options7);
+    }
 }

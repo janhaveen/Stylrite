@@ -157,6 +157,10 @@ $( function() {
 	        && $(e.target).parents('.popover.in').length === 0) { 
 	        $('[data-toggle="popover"]').popover('hide');
 	    }
+	    /* if($("#mySidenav").hasClass("viewDiv")){
+			document.getElementById("mySidenav").style.width = "0px";
+			$("#mySidenav").removeClass("viewDiv");
+		} */
 	    /* if(!$(e.target).attr('class')=="fa fa-bars"){
 	    	openNav();
 	    } */

@@ -68,7 +68,7 @@ public class MySqlConnect {
 	 return t;
 	}
 
-	public static String convertToSqlTimeStamp(String myTime1) { 
+	public static String convertToSqlTimeStamp(String myTime1) { System.out.println(myTime1);
 		String ts = null;
 		 SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM, yyyy hh:mm a");
 		 java.util.Date date; Date sqlDate; Time t; long ms;

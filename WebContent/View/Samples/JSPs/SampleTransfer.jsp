@@ -18,4 +18,6 @@
 </body>
 <script type="text/javascript" src="../JavaScripts/SalesPersonSampleTransferList.js"></script>
 <script type="text/javascript" src="../JavaScripts/SampleForSalesPersonList.js"></script>
+<script type="text/javascript" src="../../../js/General/DropDownForInventoryLegend.js"></script>
+<script type="text/javascript" src="../../../js/General/DropDownForEmployee.js"></script>
 </html>

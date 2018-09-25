@@ -10,29 +10,34 @@
 <div class="card HideThisElement" id="TaskViewDiv">
     <div class="card-body">
     	<div class="row">
-    		<div class="col-md-6"><h5 class="card-title row"><i class="fas fa-arrow-circle-left" style="margin: 0px 8px;"  id="SubmitButtonBackFromView"></i> <p id="TaskNameId">Task DEtails</p></h5></div>
-    		<div class="col-md-6 right row" id="O1" style="padding-left: 34%;">
-	    		<u style="margin-right: 11%;"><a id="editClick" href="#">Edit</a></u><div id="statusInfoDiv" class="row"><span id="statusDivView"></span></div>
+    		<div class="col-md-6"><h5 class="card-title row"><i class="fas fa-arrow-circle-left" style="margin: 0px 8px;"  id="SubmitButtonBackFromView"></i> <p id="TaskNameId">Task Details</p></h5></div>
+    		<div class="col-md-6 right row" id="O1">
+	    		<div class="col-md-3">
+	    			<u><a id="editClick" href="#">Edit</a></u>
+	    		</div>
+	    		<div class="col-md-9">
+	    			<div id="statusInfoDiv" class="row"><span id="statusDivView"></span></div>
+	    		</div>
     		</div>
     	</div>
     	<hr>
     	<dl class="row">
-		  <dt class="col-sm-2">Start Date</dt>
-		  <dd class="col-sm-2" id="StartDateText">Firstname</dd>
-		  <dt class="col-sm-2">End Date</dt>
+		  <!-- <dt class="col-sm-2">Start Date</dt>
+		  <dd class="col-sm-2" id="StartDateText">Firstname</dd> -->
+		  <dt class="col-sm-2">Due Date</dt>
 		  <dd class="col-sm-2" id="EndDateText">Lastname</dt>
 		  <dt class="col-sm-2">Assigned To</dt>
 		  <dd class="col-sm-2" id="AssignedToText">Gender</dd>
-		  <dt class="col-sm-2">Visibility</dt>
+		 <!--  <dt class="col-sm-2">Visibility</dt>
 		  <dd class="col-sm-2" id="VisibilityText">Contact</dd>
 		  <dt class="col-sm-2">Visibility To</dt>
-		  <dd class="col-sm-2" id="VisibilityToText">Alt Contact</dd>
+		  <dd class="col-sm-2" id="VisibilityToText">Alt Contact</dd> -->
 		  <dt class="col-sm-2">Priority</dt>
 		  <dd class="col-sm-2" id="PriorityText">Email</dd>
-		  <dt class="col-sm-2">Status</dt>
-		  <dd class="col-sm-2" id="StatusText">Department</dd>
+		  <!-- <dt class="col-sm-2">Status</dt>
+		  <dd class="col-sm-2" id="StatusText">Department</dd> -->
 		  <dt class="col-sm-2">Task Description</dt>
-		  <dd class="col-sm-2" id="TaskDescriptionText">Designation</dd>
+		  <dd class="col-sm-6" id="TaskDescriptionText">Designation</dd>
 		</dl><hr>
 		 <button type="button" id="AddComment" class="btn btn-sm btn-primary">Add comment</button><hr>
 		    <div id="commDiv" class="HideThisElement">

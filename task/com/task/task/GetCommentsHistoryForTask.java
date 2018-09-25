@@ -18,8 +18,8 @@ import com.data.MySql.MySqlConnect;
 /**
  * Servlet implementation class GetCommentsHistory
  */
-@WebServlet("/GetCommentsHistory")
-public class GetCommentsHistory extends HttpServlet {
+@WebServlet("/GetCommentsHistoryForTask")
+public class GetCommentsHistoryForTask extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Connection conn = null;
 	PreparedStatement stmt = null;
@@ -28,12 +28,12 @@ public class GetCommentsHistory extends HttpServlet {
 		response.setContentType("text/html");  
         PrintWriter out=response.getWriter();  
         conn= MySqlConnect.DBConnection();
-        String sql = "SELECT * FROM stylrite_general.taskloglist where 1=1 ";
+        String sql = "SELECT * FROM propel_general.taskloglist where 1=1 ";
         if(request.getParameter("TaskId")!=null) {
         	sql+=" AND TaskId='"+request.getParameter("TaskId")+"'";
 		}
        // if(request.getParameter("action")!=null) {
-        	sql+=" AND action IN (400000000011, 400000000010)";
+        	sql+=" AND action IN (400000000010)";
 		//}
         sql+=" order by createdOn desc";
         if(request.getParameter("start")!=null && request.getParameter("limit")!=null) {
@@ -80,7 +80,7 @@ public class GetCommentsHistory extends HttpServlet {
 	/*private String getPaginationLi(String poaId) {
 		String str="";
         conn= MySqlConnect.DBConnection();
-        String sql = "SELECT count(rowid) as total FROM stylrite_general.taskloglist where 1=1 ";
+        String sql = "SELECT count(rowid) as total FROM propel_general.taskloglist where 1=1 ";
         if(poaId!=null) {
         	sql+=" AND poaId='"+poaId+"'";
 		}

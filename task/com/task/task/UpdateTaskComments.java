@@ -16,8 +16,8 @@ import javax.servlet.http.HttpSession;
 import com.general.system.GetSystemDetails;
 
 
-@WebServlet("/UpdateComments")
-public class UpdateComments extends HttpServlet {
+@WebServlet("/UpdateTaskComments")
+public class UpdateTaskComments extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Date d1=new Date(System.currentTimeMillis());
 	
@@ -28,7 +28,7 @@ public class UpdateComments extends HttpServlet {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		Date date1 = new Date(System.currentTimeMillis());
 		Task t=new Task();	
-		TaskLog tl=new TaskLog();		
+		ProjectTaskLog tl=new ProjectTaskLog();		
 		
 		tl.setTaskLogId(UUID.randomUUID().toString());
 		tl.setTaskId(request.getParameter("TaskId"));

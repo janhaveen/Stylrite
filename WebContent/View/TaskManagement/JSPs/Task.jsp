@@ -9,11 +9,14 @@
 </head>
 <body>
 <%@include file="../../Header.jsp" %>
+
 <div class="container">
 		<div class="container-fluid">
-			<%@include file="TaskList.jsp" %>
+			<input type="hidden" id="v" value="<%=request.getParameter("v")%>">
+			<%@include file="TaskCard.jsp" %>
 			<%@include file="TaskView.jsp" %>
 			<%@include file="CreateTask.jsp" %>
+			<%@include file="DeleteTask.jsp" %>
 		</div>
 </div>
 </body>
